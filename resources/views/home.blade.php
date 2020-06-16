@@ -19,8 +19,10 @@
                                     </div>
 
                                     <div class="media-body">
-                                        <p class="name">{{ $user->name }}</p>
-                                        <p class="email">{{ $user->email }}</p>
+                                        <p>{{ $user->name }}</p>
+                                        <p>{{ $user->email }}</p>
+                                        <p id="status_{{ $user->id }}">{{$user->is_online}}</p>
+
                                     </div>
                                 </div>
                             </li>
@@ -34,4 +36,23 @@
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+$(document).ready(function(){
+    let u_id = "{{Auth::id()}}";
+      let url = "{{url('status/')}}"+"/"+u_id+"/"+'active';
+     
+      $.ajax({
+                type: "get",
+                url:url , // need to create this route
+               
+                cache: false,
+                success: function (data) {
+                 
+                }
+            });
+      //   });
+});
+</script>
 @endsection

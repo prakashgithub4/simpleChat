@@ -199,6 +199,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
+                                                     inactive();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
@@ -253,6 +254,8 @@
                 if (receiver_id == data.from) {
                     // if receiver is selected, reload the selected user ...
                     $('#' + data.from).click();
+                    
+
                 } else {
                     // if receiver is not seleted, add notification for that user
                     var pending = parseInt($('#' + data.from).find('.pending').html());
@@ -263,6 +266,13 @@
                         $('#' + data.from).append('<span class="pending">1</span>');
                     }
                 }
+            }
+            if(data.status=='active'){
+              
+              $("#status_"+data.id).html(data.status)
+            }
+            else{
+               $("#status_"+data.id).html(data.status)
             }
         });
 
@@ -316,6 +326,24 @@
         $('.message-wrapper').animate({
             scrollTop: $('.message-wrapper').get(0).scrollHeight
         }, 50);
+    }
+
+    function inactive(){
+    
+      let u_id = "{{Auth::id()}}";
+      let url = "{{url('status/')}}"+"/"+u_id+"/"+'inactive';
+     
+      $.ajax({
+                type: "get",
+                url:url , // need to create this route
+               
+                cache: false,
+                success: function (data) {
+               
+                }
+            });
+
+
     }
 </script>
 </body>

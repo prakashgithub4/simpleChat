@@ -49,4 +49,10 @@ class HomeController extends Controller
      
       Message::sendMessages($data);
     }
+     public function status($u_id,$status){
+       
+      $user = User::status($u_id,$status);
+      
+
+    }
 }
